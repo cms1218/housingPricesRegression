@@ -1,5 +1,5 @@
 # housingPricesRegression
-This is a project practicing ML with scikit-learn by building a regression model a housing dataset.
+This is a project practicing ML building a linear regression model from scratch for a housing dataset.
 
 The 'California Housing Prices' dataset (found here: https://www.kaggle.com/datasets/camnugent/california-housing-prices) is used for this project.
 
