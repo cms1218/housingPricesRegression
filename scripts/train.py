@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from data_preprocessing import clean_data
@@ -12,8 +13,20 @@ y = df['median_house_value']
 
 X = clean_data(X)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+Xmtrx = X.to_numpy()
+ymtrx = y.to_numpy().reshape(-1, 1)
 
-reg = LinearRegression().fit(X_train, y_train)
-print(reg.score(X_train, y_train))
+Xmtrx = np.c_[np.ones((Xmtrx.shape[0], 1)), Xmtrx]
+
+theta = np.linalg.inv(Xmtrx.T @ Xmtrx) @ (Xmtrx.T @ ymtrx)
+
+y_pred = Xmtrx @ theta
+
+mse = np.mean((y_pred - ymtrx) ** 2)
+print(mse)
+
+rmse = np.sqrt(mse)
+print(rmse)
+
+
 
