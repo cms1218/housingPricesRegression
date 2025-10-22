@@ -7,7 +7,7 @@ from sklearn.linear_model import LinearRegression
 from data_preprocessing import clean_data
 
 learn_rate = 0.0001
-epochs = 10
+epochs = 25
 
 # Read csv into pandas dataframe
 df = pd.read_csv(os.path.join("data", "housing.csv"))
@@ -39,6 +39,7 @@ for epoch in range(epochs):
 plt.plot(range(epochs), error_per_epoch)
 plt.show()
 
+print(error_per_epoch[-1])
 
 
 

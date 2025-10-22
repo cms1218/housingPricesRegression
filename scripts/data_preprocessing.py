@@ -11,8 +11,15 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
     # Drop categorical and irrelevant columns
     df = df.drop(columns=['ocean_proximity', 'latitude', 'longitude'])
 
+    # Feature Engineering
+    df['rooms_per_household'] = df['total_rooms'] / df['households']
+    df['bedrooms_per_room'] = df['total_bedrooms'] / df['total_rooms']
+
+
     # Normalize numerical features
-    for column in ['total_rooms', 'total_bedrooms', 'population', 'households', 'median_income', 'housing_median_age']:
+    for column in ['total_rooms', 'total_bedrooms', 'population', 'households',
+                    'median_income', 'housing_median_age', 'bedrooms_per_room',
+                    'rooms_per_household']:
         df[column] = (df[column] - df[column].mean()) / df[column].std()
     
     return df
